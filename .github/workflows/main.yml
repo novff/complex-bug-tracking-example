@@ -1,0 +1,16 @@
+name: Generate Report
+on:
+  schedule:
+    - cron: '0 0 * * 1' # Каждый понедельник
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Script
+        run: python report.py
+      - name: Upload Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: task-report
+          path: report.json
